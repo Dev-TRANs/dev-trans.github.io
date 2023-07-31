@@ -1,0 +1,29 @@
+---
+import TransOneColorLogo from "../assets/TRANs-onecolor.astro"
+import {
+  IconBrandDiscord,
+  IconBrandGithub,
+} from "@tabler/icons-preact"
+---
+
+<div class="p-4 bg-gray-800 text-white w-full">
+  <div class="flex flex-wrap gap-4 justify-around">
+    <div>
+      <TransOneColorLogo class="md:w-24" />
+      <div>生徒会情報機構</div>
+    </div>
+    <div>
+      <ul>
+        <li><b>Links</b></li>
+        <li><a href="join" class="link">参加する</a></li>
+      </ul>
+    </div>
+    <div>
+      <div><b>Social</b></div>
+      <div class="grid grid-cols-3">
+        <a href="https://discord.gg/7AwHGrhf6z"><IconBrandDiscord /></a>
+        <a href="https://github.com/Dev-TRANs"><IconBrandGithub /></a>
+      </div>
+    </div>
+  </div>
+</div>

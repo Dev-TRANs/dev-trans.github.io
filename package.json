@@ -10,6 +10,11 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^2.9.6"
+    "@astrojs/preact": "^2.2.1",
+    "@astrojs/tailwind": "^4.0.0",
+    "@tabler/icons-preact": "^2.30.0",
+    "astro": "^2.9.6",
+    "preact": "^10.6.5",
+    "tailwindcss": "^3.0.24"
   }
 }
