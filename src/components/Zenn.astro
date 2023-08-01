@@ -1,0 +1,10 @@
+---
+import { ofetch } from "ofetch"
+
+const data = await ofetch("https://api.rss2json.com/v1/api.json?rss_url=https://zenn.dev/p/trans/feed", {
+  parseResponse: JSON.parse,
+}) // fetch latest Zenn Post
+---
+<div>
+  { JSON.stringify(data) }
+</div>
