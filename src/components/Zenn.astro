@@ -29,7 +29,7 @@ const data: ZennContent = await ofetch<ZennContent>("https://api.rss2json.com/v1
           <img src={post.enclosure.link} alt={post.title} class="w-full" />
         </div>
         <div>
-          <div>
+          <div class="flex items-center justify-center">
             <IconCalendarEvent />
             <span>{(() => {
               const dates = post.pubDate.split(/[- :]/g)
