@@ -1,6 +1,8 @@
 ---
 import { ofetch } from "ofetch"
-
+import {
+  IconCalendarEvent,
+} from "@tabler/icons-preact"
 interface Post {
   title: string
   link: string
@@ -10,6 +12,7 @@ interface Post {
     link: string
     type: string
   }
+  pubDate: string
 }
 interface ZennContent {
   items: Post[]
@@ -24,6 +27,15 @@ const data: ZennContent = await ofetch<ZennContent>("https://api.rss2json.com/v1
       return <div class="border p-4 rounded-md">
         <div>
           <img src={post.enclosure.link} alt={post.title} class="w-full" />
+        </div>
+        <div>
+          <div>
+            <IconCalendarEvent />
+            <span>{(() => {
+              const dates = post.pubDate.split(/[- :]/g)
+              return `${dates[0]}/${dates[1]}/${dates[2]}`
+            })()}</span>
+          </div>
         </div>
         <div>
           <p>{ post.description.slice(0,40) + "..." }</p>
