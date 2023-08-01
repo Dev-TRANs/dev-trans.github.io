@@ -1,10 +1,34 @@
 ---
 import { ofetch } from "ofetch"
 
-const data = await ofetch("https://api.rss2json.com/v1/api.json?rss_url=https://zenn.dev/p/trans/feed", {
+interface Post {
+  title: string
+  link: string
+  description: string
+  content: string
+  enclosure: {
+    link: string
+    type: string
+  }
+}
+interface ZennContent {
+  items: Post[]
+}
+const data: ZennContent = await ofetch<ZennContent>("https://api.rss2json.com/v1/api.json?rss_url=https://zenn.dev/p/trans/feed", {
   parseResponse: JSON.parse,
 }) // fetch latest Zenn Post
 ---
 <div>
-  { JSON.stringify(data) }
+  {
+    data.items.map((post: Post) => {
+      return <div class="border p-4">
+        <div>
+          <img src={post.enclosure.link} alt={post.title} />
+        </div>
+        <div>
+          <p>{ post.description }</p>
+        </div>
+      </div>
+    })
+  }
 </div>
