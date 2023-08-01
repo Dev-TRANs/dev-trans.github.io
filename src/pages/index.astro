@@ -1,13 +1,10 @@
 ---
-import Base from "../layouts/Base.astro"
+import Page from "../layouts/Page.astro"
 import Header from "../components/Header.astro"
 import transLogo from "../assets/TRANs.svg"
 import Footer from "../components/Footer.astro"
 ---
-<Base title="TRANs">
-  <div class="sticky top-0">
-    <Header />
-  </div>
+<Page title="TRANs">
   <div class="mx-10 mt-4 min-h-screen">
     <div class="text-center">
       <div><img src={transLogo} alt="TRANs" class="h-12 mx-auto" /></div>
@@ -21,7 +18,4 @@ import Footer from "../components/Footer.astro"
       </div>
     </div>
   </div>
-  <div>
-    <Footer />
-  </div>
-</Base>
+</Page>
