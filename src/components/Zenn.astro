@@ -28,6 +28,9 @@ const data: ZennContent = await ofetch<ZennContent>("https://api.rss2json.com/v1
         <div>
           <p>{ post.description }</p>
         </div>
+        <div>
+          <a href={post.link} class="link" >Show more👉</a>
+        </div>
       </div>
     })
   }
