@@ -4,6 +4,8 @@ on:
   push:
     branches: ["main"]
   workflow_dispatch:
+  schedule:
+    - cron:  '00 11 * * *'
 permissions:
   contents: read
   pages: write
