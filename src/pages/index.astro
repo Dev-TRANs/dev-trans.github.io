@@ -5,8 +5,8 @@ import Articles from "../components/Article.astro"
 import Projects from "../components/Projects.astro"
 ---
 <Page title="TRANs">
-  <div class="mt-4 min-h-screen">
-    <div class="mx-10 max-w-5xl lg:mx-auto my-16 grid grid-cols-1 sm:grid-cols-8 w-full">
+  <div class="mx-10 mt-4 min-h-screen max-w-5xl lg:mx-auto">
+    <div class="my-16 grid grid-cols-1 sm:grid-cols-8 w-full">
       <div class="flex justify-center sm:justify-start sm:grid-cols-subgrid sm:col-span-3">
         <div class="vertical-rl text-2xl sms:text-4xl sm:text-2xl lg:text-4xl text-center pl-3">生徒会情報機構</div>
         <div class="my-auto border-l-2 border-slate-500 text-4xl sms:text-7xl sm:text-4xl lg:text-7xl ml-4 pl-4">
@@ -29,7 +29,7 @@ import Projects from "../components/Projects.astro"
       <div class="text-xl text-center mb-4 text-gray-900">開発中</div>
       <Projects status="developing" />
     </div>
-    <div class="m-2">
+    <div class="my-2">
       <div class="text-2xl text-center mb-4">Articles</div>
       <Articles />
     </div>
