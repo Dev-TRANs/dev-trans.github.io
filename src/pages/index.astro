@@ -1,24 +1,37 @@
 ---
 import Page from "../layouts/Page.astro"
 import transLogo from "../assets/TRANs.svg"
-import ZennContent from "../components/Zenn.astro"
+import Articles from "../components/Article.astro"
+import Projects from "../components/Projects.astro"
 ---
 <Page title="TRANs">
-  <div class="mx-10 mt-4 min-h-screen">
-    <div class="text-center">
-      <div><img src={transLogo} alt="TRANs" class="h-12 mx-auto" /></div>
-      <div>生徒会情報機構</div>
-    </div>
-    <div>
-      <div class="text-2xl">TRANsとは?</div>
-      <div>
-        TRANs(生徒会情報機構)は生徒会のデジタル委員会やICT委員会などの情報共有・知見交流・技術共有・システム統合に向けて設立された機関です。
-        <br>また、地域間の情報格差の是正や技術的問題の早期解決なども目的としています。
+  <div class="mx-10 mt-4 min-h-screen max-w-5xl lg:mx-auto">
+    <div class="my-16 grid grid-cols-1 sm:grid-cols-8 w-full">
+      <div class="flex justify-center sm:justify-start sm:grid-cols-subgrid sm:col-span-3">
+        <div class="vertical-rl text-2xl sms:text-4xl sm:text-2xl lg:text-4xl text-center pl-3">生徒会情報機構</div>
+        <div class="my-auto border-l-2 border-slate-500 text-4xl sms:text-7xl sm:text-4xl lg:text-7xl ml-4 pl-4">
+          <p>技術で</p>
+          <p class="my-4">生徒会に</p>
+          <p>改革を。</p>
+        </div>
+      </div>
+      <div class="container my-auto sm:grid-cols-subgrid sm:col-span-5">
+        <p class="mb-4 mt-12 sm:mt-4">TRANs（生徒会情報機構）は生徒会のデジタル委員会やICT委員会などの情報共有・知見交流・技術共有・システム統合に向けて設立された機関です。</p>
+        <div class="text-center sm:text-left mt-8 font-bold">
+          <a href="https://discord.com/invite/jnZevNmYRg">
+            <button class="bg-transparent text-primary hover:bg-primary hover:text-white transition border border-primary rounded px-4 py-2">JOIN US</button>
+          </a>
+        </div>
       </div>
     </div>
     <div class="my-2">
-      <div class="text-2xl">Zennの投稿</div>
-      <ZennContent />
+      <div class="text-2xl text-center mb-4">Projects</div>
+      <div class="text-xl text-center mb-4 text-gray-900">開発中</div>
+      <Projects status="developing" />
+    </div>
+    <div class="my-2">
+      <div class="text-2xl text-center mb-4">Articles</div>
+      <Articles />
     </div>
   </div>
 </Page>
