@@ -53,8 +53,8 @@ const sortedData = combinedData.sort(compareDates);
         if(article.article_type == "tech"){
           return <a href={`https://zenn.dev/trans/articles/${article.slug}`} class="no-underline">
             <div class="p-4">
-              <div class="aspect-square sms:aspect-oblong rounded-t-xl bg-blue-200 relative p-0 flex items-center justify-center">
-                  <div class="text-3xl sm:text-4xl md:text-5xl text-center">{article.emoji}</div>
+              <div class="aspect-oblong sms:aspect-square sm:aspect-oblong rounded-t-xl bg-blue-200 relative p-0 flex items-center justify-center">
+                  <div class="text-4xl sms:text-3xl sm:text-4xl md:text-5xl text-center">{article.emoji}</div>
                   <div class="text-xs text-center absolute left-4 top-3 py-1 px-2 font-bold bg-blue-500 rounded-full text-white">TECH</div>
               </div>
               <div class="border border-1 border-gray-400 p-3 rounded-b-xl shadow-xl border-t-0">
@@ -69,8 +69,8 @@ const sortedData = combinedData.sort(compareDates);
         }else{
           return <a href={`https://zenn.dev/trans/articles/${article.slug}`} class="no-underline">
             <div class="p-4">
-              <div class="aspect-square sms:aspect-oblong rounded-t-xl bg-violet-200 relative p-0 flex items-center justify-center">
-                  <div class="text-3xl sm:text-4xl md:text-5xl text-center">{article.emoji}</div>
+              <div class="aspect-oblong sms:aspect-square sm:aspect-oblong rounded-t-xl bg-violet-200 relative p-0 flex items-center justify-center">
+                  <div class="text-4xl sms:text-3xl sm:text-4xl md:text-5xl text-center">{article.emoji}</div>
                   <div class="text-xs text-center absolute left-4 top-3 py-1 px-2 font-bold bg-violet-500 rounded-full text-white">IDEA</div>
               </div>
               <div class="border border-1 border-gray-400 p-3 rounded-b-xl shadow-xl border-t-0">
@@ -86,7 +86,7 @@ const sortedData = combinedData.sort(compareDates);
       }else{
         return <a href={`https://note.com/${article.user.urlname}/n/${article.key}`} class="no-underline">
             <div class="p-4">
-                <div class="aspect-square sms:aspect-oblong ">
+                <div class="aspect-oblong sms:aspect-square sm:aspect-oblong">
                     <img src={article.eyecatch ? article.eyecatch : "./no-thumbnail.png"} class="border border-1 border-gray-400 w-full h-full object-cover rounded-t-xl h-full">
                 </div>
                 <div class="border border-1 border-gray-400 p-3 rounded-b-xl shadow-xl border-t-0">
