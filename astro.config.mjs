@@ -8,5 +8,5 @@ import sitemap from "@astrojs/sitemap";
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind(), preact(), mdx(), sitemap()],
-  site: "https://dev-trans.github.io",
+  site: "https://trans.stki.org",
 });
