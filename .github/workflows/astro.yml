@@ -27,11 +27,18 @@ jobs:
       - name: Setup Node.js environment 💚
         uses: actions/setup-node@v3.7.0
         with:
-           node-version: 18.x
+          node-version: 18.x
       - name: Setup pnpm ✊
         uses: pnpm/action-setup@v2.4.0
         with:
           version: latest
+      - name: Cache node_modules
+        id: node_modules_cache_id
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: npm-deps-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: pnpm-deps-
       - name: Install deps 🍢
         run: pnpm install
       - name: Build Website from Astro 🏭
