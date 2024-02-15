@@ -1,5 +1,6 @@
 ---
 export type Props = {
+  prop: {
   title: string;
   link: string;
   thumbnail: any;
@@ -12,7 +13,8 @@ export type Props = {
       | string | undefined;
   };
 };
-const { title, link, thumbnail, poster_name, poster_icon_url, tag } = Astro.props;
+};
+const { title, link, thumbnail, poster_name, poster_icon_url, tag } = Astro.props.prop;
 ---
 <a href={link} class="no-underline">
   <div class="p-4">
