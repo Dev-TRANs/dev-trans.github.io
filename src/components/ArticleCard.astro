@@ -1,0 +1,33 @@
+---
+export type Props = {
+  title: string;
+  link: string;
+  thumbnail: any;
+  poster_name: string;
+  poster_icon_url: string;
+  tag: {
+    text: string | undefined;
+    bg: /* Zenn idea */ "bg-blue-200"
+      | /* Zenn tech */ "bg-violet-500"
+      | string | undefined;
+  };
+};
+const { title, link, thumbnail, poster_name, poster_icon_url, tag } = Astro.props;
+---
+<a href={link} class="no-underline">
+  <div class="p-4">
+    <div class="aspect-oblong sms:aspect-square sm:aspect-oblong rounded-t-xl bg-blue-200 relative p-0 flex items-center justify-center">
+      {thumbnail}
+      {(tag.text !== undefined) &&
+        <div class={"text-xs text-center absolute left-4 top-3 py-1 px-2 font-bold rounded-full text-white "+tag.bg}>{tag}</div>
+      }
+    </div>
+    <div class="border border-1 border-gray-400 p-3 rounded-b-xl shadow-xl border-t-0">
+      <p class="text-sm font-bold line-clamp-3 h-20">{title}</p>
+      <div class="flex justify-right items-center mt-4">
+        <img src={poster_icon_url} class="w-8 rounded-full" />
+        <p class="ms-1 text-xs text-gray-500 line-clamp-2">{poster_name}</p>
+      </div>
+    </div>
+  </div>
+</a>

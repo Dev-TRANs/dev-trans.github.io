@@ -1,0 +1,104 @@
+---
+import { ofetch } from "ofetch";
+import ArticleCard from "./ArticleCard.astro";
+
+type ZennArticle = {
+  site: "zenn";
+  title: string;
+  path: string;
+  article_type: string;
+  emoji: string;
+  published_at: string;
+  user: {
+    name: string;
+    avatar_small_url: string;
+  };
+};
+type ZennContent = {
+  articles: ZennArticle[];
+};
+
+type NoteArticle = {
+  site: "note";
+  key: string;
+  name: string;
+  eyecatch: (string | null);
+  publish_at: string;
+  user: {
+    name: string;
+    urlname: string;
+    profile_image_path: string;
+  };
+};
+type NoteContent = {
+  data: {
+    section: {
+      contents: NoteArticle[];
+    };
+  };
+};
+
+type QiitaArticle = {
+  site: "qiita";
+  created_at: string;
+  title: string;
+  url: string;
+  user: {
+    id: string;
+    profile_image_url: string;
+  },
+  organization_url_name: string;
+};
+type QiitaContent = QiitaArticle[];
+
+const zennData: ZennContent = await ofetch<ZennContent>("https://zenn.dev/api/articles?publication_name=trans&order=latest", {
+  parseResponse: (res: string) => {return {site: "zenn", ...JSON.parse(res)}},
+});
+const noteData: NoteContent = await ofetch<NoteContent>("https://note.com/api/v1/layout/magazine/me3717a077c16/section?page=1", {
+  parseResponse: (res: string) => {return {site: "note", ...JSON.parse(res)}},
+});
+const qiitaData: QiitaContent = await ofetch<QiitaContent>("https://qiita.com/api/v2/items?page=1&per_page=20&query=org%3Atrans-dev&sort=created", {
+  parseResponse: (res: string) => {return {site: "qiita", ...JSON.parse(res)}},
+});
+const combinedData: (ZennArticle | NoteArticle | QiitaArticle)[] = [...zennData.articles, ...noteData.data.section.contents, ...qiitaData];
+const compareDates = (a: { published_at: string } | { publish_at: string } | { created_at: string},
+                      b: { published_at: string } | { publish_at: string } | { created_at: string},
+  ): number => {
+    const dateA = new Date(a.published_at || a.publish_at || a.created_at).getTime();
+    const dateB = new Date(b.published_at || b.publish_at || b.created_at).getTime();
+    return dateB - dateA;
+  };
+const sortedData = combinedData.sort(compareDates);
+---
+<div class="grid grid-cols-1 sms:grid-cols-2 sm:grid-cols-3 gap-2">
+  {
+    sortedData.map((article: (ZennArticle | NoteArticle | QiitaArticle)) => {
+      if(article.site === "zenn") {
+        return <ArticleCard
+          title={article.title}
+          link={"https://zenn.dev" + article.path}
+          thumbnail={<div class="text-4xl md:text-5xl text-center">{article.emoji}</div>}
+          poster_name={article.user.name}
+          poster_icon_url={article.user.avatar_small_url}
+          tag={(article.article_type === "idea" ? {text: "IDEA", bg: "bg-violet-500"} : {text: "TECH", bg: "bg-blue-200"})}
+        />
+      } else if(article.site === "note") {
+        return <ArticleCard
+          title={article.name}
+          link={`https://note.com/${article.user.urlname}/n/${article.key}`}
+          thumbnail={<img src={article.eyecatch || "./no-thumbnail.png"} class="border border-1 border-gray-400 w-full h-full object-cover rounded-t-xl h-full" />}
+          poster_name={article.user.name}
+          poster_icon_url={article.user.profile_image_path}
+        />;
+      } else if(article.site === "qiita") {
+        return <ArticleCard
+          title={article.title}
+          link={article.url}
+          thumbnail={<img src="https://cdn.qiita.com/assets/public/qiita-pwa-icon_512-4f5b031e6cb002cb865db0dd38635a78.png" class="border border-1 border-gray-400 w-full h-full object-cover rounded-t-xl h-full" />}
+          poster_name={article.user.id}
+          poster_icon_url={article.user.profile_image_url}
+        />;
+      }
+    });
+  }
+</div>
