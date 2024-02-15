@@ -1,20 +1,23 @@
 ---
-import { ofetch } from "ofetch"
-interface ZennArticle {
-  title: string
-  slug: string
-  article_type: string
-  emoji: string
-  published_at: string
+import { ofetch } from "ofetch";
+type ZennArticle = {
+  site: "zenn";
+  title: string;
+  path: string;
+  article_type: string;
+  emoji: string;
+  published_at: string;
   user: {
-    name: string
-    avatar_small_url: string
-  }
-}
-interface ZennContent {
-  articles: ZennArticle[]
-}
+    name: string;
+    avatar_small_url: string;
+  };
+};
+type ZennContent = {
+  articles: ZennArticle[];
+};
+
 type NoteArticle = {
+  site: "note";
   key: string;
   name: string;
   eyecatch: (string | null);
@@ -25,79 +28,109 @@ type NoteArticle = {
     profile_image_path: string;
   };
 };
-interface NoteContent {
+type NoteContent = {
   data: {
     section: {
-      contents: NoteArticle[]
-    }
-  }
-}
-const zennData: ZennContent = await ofetch<ZennContent>("https://zenn.dev/api/articles?publication_name=trans&order=latest", {
-  parseResponse: JSON.parse,
-})
-const noteData: NoteContent = await ofetch<NoteContent>("https://note.com/api/v1/layout/magazine/me3717a077c16/section?page=1", {
-  parseResponse: JSON.parse,
-})
-const combinedData: (ZennArticle | NoteArticle)[] = [...zennData.articles, ...noteData.data.section.contents];
-const compareDates = (a: { published_at: string } | { publish_at: string }, b: { published_at: string } | { publish_at: string }): number => {
-  const dateA = new Date(a.published_at || a.publish_at).getTime();
-  const dateB = new Date(b.published_at || b.publish_at).getTime();
-  return dateB - dateA;
+      contents: NoteArticle[];
+    };
+  };
 };
+
+type QiitaArticle = {
+  site: "qiita";
+  created_at: string;
+  title: string;
+  url: string;
+  user: {
+    id: string;
+    profile_image_url: string;
+  },
+  organization_url_name: string;
+};
+type QiitaContent = QiitaArticle[];
+
+const zennData: ZennContent = await ofetch<ZennContent>("https://zenn.dev/api/articles?publication_name=trans&order=latest", {
+  parseResponse: (res: string) => {return {site: "zenn", ...JSON.parse(res)}},
+});
+const noteData: NoteContent = await ofetch<NoteContent>("https://note.com/api/v1/layout/magazine/me3717a077c16/section?page=1", {
+  parseResponse: (res: string) => {return {site: "note", ...JSON.parse(res)}},
+});
+const qiitaData: QiitaContent = await ofetch<QiitaContent>("https://qiita.com/api/v2/items?page=1&per_page=20&query=org%3Atrans-dev&sort=created", {
+  parseResponse: (res: string) => {return {site: "qiita", ...JSON.parse(res)}},
+});
+const combinedData: (ZennArticle | NoteArticle | QiitaArticle)[] = [...zennData.articles, ...noteData.data.section.contents, ...qiitaData];
+const compareDates = (a: { published_at: string } | { publish_at: string } | { created_at: string},
+                      b: { published_at: string } | { publish_at: string } | { created_at: string},
+  ): number => {
+    const dateA = new Date(a.published_at || a.publish_at || a.created_at).getTime();
+    const dateB = new Date(b.published_at || b.publish_at || b.created_at).getTime();
+    return dateB - dateA;
+  };
 const sortedData = combinedData.sort(compareDates);
+
+function createArticleCard({
+  title, link, thumbnail, poster_name, poster_icon_url, tag,
+}: {
+  title: string;
+  link: string;
+  thumbnail: any;
+  poster_name: string;
+  poster_icon_url: string;
+  tag: {
+    text: string | undefined;
+    bg: /* Zenn idea */ "bg-blue-200"
+      | /* Zenn tech */ "bg-violet-500"
+      | string | undefined;
+  };
+}) {
+  return (<a href={link} class="no-underline">
+    <div class="p-4">
+      <div class="aspect-oblong sms:aspect-square sm:aspect-oblong rounded-t-xl bg-blue-200 relative p-0 flex items-center justify-center">
+        {thumbnail}
+        {(tag.text !== undefined) &&
+          <div class={"text-xs text-center absolute left-4 top-3 py-1 px-2 font-bold rounded-full text-white "+tag.bg}>{tag}</div>
+        }
+      </div>
+      <div class="border border-1 border-gray-400 p-3 rounded-b-xl shadow-xl border-t-0">
+        <p class="text-sm font-bold line-clamp-3 h-20">{title}</p>
+        <div class="flex justify-right items-center mt-4">
+          <img src={poster_icon_url} class="w-8 rounded-full" />
+          <p class="ms-1 text-xs text-gray-500 line-clamp-2">{poster_name}</p>
+        </div>
+      </div>
+    </div>
+  </a>);
+}
 ---
 <div class="grid grid-cols-1 sms:grid-cols-2 sm:grid-cols-3 gap-2">
   {
-    sortedData.map((article: (ZennArticle | NoteArticle)) => {
-      if("article_type" in article){
-        if(article.article_type == "tech"){
-          return <a href={`https://zenn.dev/trans/articles/${article.slug}`} class="no-underline">
-            <div class="p-4">
-              <div class="aspect-oblong sms:aspect-square sm:aspect-oblong rounded-t-xl bg-blue-200 relative p-0 flex items-center justify-center">
-                  <div class="text-4xl md:text-5xl text-center">{article.emoji}</div>
-                  <div class="text-xs text-center absolute left-4 top-3 py-1 px-2 font-bold bg-blue-500 rounded-full text-white">TECH</div>
-              </div>
-              <div class="border border-1 border-gray-400 p-3 rounded-b-xl shadow-xl border-t-0">
-                  <p class="text-sm font-bold line-clamp-3 h-20">{article.title}</p>
-                  <div class="flex justify-right items-center mt-4">
-                      <img src={article.user.avatar_small_url} class="w-8 rounded-full">
-                      <p class="ms-1 text-xs text-gray-500 line-clamp-2">{article.user.name}</p>
-                  </div>
-              </div>
-            </div>
-          </a>
-        }else{
-          return <a href={`https://zenn.dev/trans/articles/${article.slug}`} class="no-underline">
-            <div class="p-4">
-              <div class="aspect-oblong sms:aspect-square sm:aspect-oblong rounded-t-xl bg-violet-200 relative p-0 flex items-center justify-center">
-                  <div class="text-4xl md:text-5xl text-center">{article.emoji}</div>
-                  <div class="text-xs text-center absolute left-4 top-3 py-1 px-2 font-bold bg-violet-500 rounded-full text-white">IDEA</div>
-              </div>
-              <div class="border border-1 border-gray-400 p-3 rounded-b-xl shadow-xl border-t-0">
-                  <p class="text-sm font-bold line-clamp-3 h-20">{article.title}</p>
-                  <div class="flex justify-right items-center mt-4">
-                      <img src={article.user.avatar_small_url} class="w-8 rounded-full">
-                      <p class="ms-1 text-xs text-gray-500 line-clamp-2">{article.user.name}</p>
-                  </div>
-              </div>
-            </div>
-          </a>
-        }
-      }else{
-        return <a href={`https://note.com/${article.user.urlname}/n/${article.key}`} class="no-underline">
-            <div class="p-4">
-                <div class="aspect-oblong sms:aspect-square sm:aspect-oblong">
-                    <img src={article.eyecatch ? article.eyecatch : "./no-thumbnail.png"} class="border border-1 border-gray-400 w-full h-full object-cover rounded-t-xl h-full">
-                </div>
-                <div class="border border-1 border-gray-400 p-3 rounded-b-xl shadow-xl border-t-0">
-                    <p class="text-sm font-bold line-clamp-3 h-20">{article.name}</p>
-                    <div class="flex justify-right items-center mt-4">
-                        <img src={article.user.profile_image_path} class="w-8 rounded-full">
-                        <p class="ms-1 text-xs text-gray-500 line-clamp-2">{article.user.name}</p>
-                    </div>
-                </div>
-            </div>
-          </a>
+    sortedData.map((article: (ZennArticle | NoteArticle | QiitaArticle)) => {
+      if(article.site === "zenn") {
+        return createArticleCard({
+          title: article.title,
+          link: "https://zenn.dev" + article.path,
+          thumbnail: <div class="text-4xl md:text-5xl text-center">{article.emoji}</div>,
+          poster_name: article.user.name,
+          poster_icon_url: article.user.avatar_small_url,
+          tag: (article.article_type === "idea" ? {text: "IDEA", bg: "bg-violet-500"} : {text: "TECH", bg: "bg-blue-200"}),
+        });
+      } else if(article.site === "note") {
+        return createArticleCard({
+          title: article.name,
+          link: `https://note.com/${article.user.urlname}/n/${article.key}`,
+          thumbnail: <img src={article.eyecatch || "./no-thumbnail.png"} class="border border-1 border-gray-400 w-full h-full object-cover rounded-t-xl h-full" />,
+          poster_name: article.user.name,
+          poster_icon_url: article.user.profile_image_path,
+        });
+      } else if(article.site === "qiita") {
+        return createArticleCard({
+          title: article.title,
+          link: article.url,
+          thumbnail: <img src="https://cdn.qiita.com/assets/public/qiita-pwa-icon_512-4f5b031e6cb002cb865db0dd38635a78.png" class="border border-1 border-gray-400 w-full h-full object-cover rounded-t-xl h-full" />,
+          poster_name: article.user.id,
+          poster_icon_url: article.user.profile_image_url,
+        });
       }
-    })
+    });
+  }
 </div>
