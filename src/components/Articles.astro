@@ -76,7 +76,7 @@ console.log(sortedData);
   {
     sortedData.map((article: (ZennArticle | NoteArticle | QiitaArticle)) => {
       if(article.site === "zenn") {
-        (<ArticleCard
+        return (<ArticleCard
           title={article.title}
           link={"https://zenn.dev" + article.path}
           thumbnail={<div class="text-4xl md:text-5xl text-center">{article.emoji}</div>}
@@ -85,7 +85,7 @@ console.log(sortedData);
           tag={(article.article_type === "idea" ? {text: "IDEA", bg: "bg-violet-500"} : {text: "TECH", bg: "bg-blue-200"})}
         />);
       } else if(article.site === "note") {
-        (<ArticleCard
+        return (<ArticleCard
           title={article.name}
           link={`https://note.com/${article.user.urlname}/n/${article.key}`}
           thumbnail={<img src={article.eyecatch || "./no-thumbnail.png"} class="border border-1 border-gray-400 w-full h-full object-cover rounded-t-xl h-full" />}
@@ -93,7 +93,7 @@ console.log(sortedData);
           poster_icon_url={article.user.profile_image_path}
         />);
       } else if(article.site === "qiita") {
-        (<ArticleCard
+        return (<ArticleCard
           title={article.title}
           link={article.url}
           thumbnail={<img src="https://cdn.qiita.com/assets/public/qiita-pwa-icon_512-4f5b031e6cb002cb865db0dd38635a78.png" class="border border-1 border-gray-400 w-full h-full object-cover rounded-t-xl h-full" />}
