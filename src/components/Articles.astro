@@ -73,6 +73,7 @@ const sortedData = combinedData.sort(compareDates);
 <div class="grid grid-cols-1 sms:grid-cols-2 sm:grid-cols-3 gap-2">
   {
     sortedData.map((article: (ZennArticle | NoteArticle | QiitaArticle)) => {
+      console.log(JSON.stringify(article, null, 2));
       if(article.site === "zenn") {
         return <ArticleCard
           title={article.title}
