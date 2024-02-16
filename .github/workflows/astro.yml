@@ -44,7 +44,7 @@ jobs:
       - name: Build Website from Astro 🏭
         run: pnpm build
       - name: Upload artifact ⏫
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v2
         with:
           path: './dist'
       - name: Deploy to GitHub Pages ✍️
