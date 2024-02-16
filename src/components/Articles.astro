@@ -87,6 +87,7 @@ const sortedData = combinedData.sort(compareDates);
           poster_name={article.user.name}
           poster_icon_url={article.user.avatar_small_url}
           tag={(article.article_type === "idea" ? {text: "IDEA", bg: "bg-violet-500"} : {text: "TECH", bg: "bg-blue-500"})}
+          bg={(article.article_type === "idea" ? "bg-violet-200" : "bg-blue-200")}
         >
           <div class="text-4xl md:text-5xl text-center">{article.emoji}</div>
         </ArticleCard>);
