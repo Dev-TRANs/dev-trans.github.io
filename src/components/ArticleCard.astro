@@ -7,20 +7,23 @@ export type Props = {
   poster_icon_url: string;
   tag: {
     text: string | undefined;
-    bg: /* Zenn idea */ "bg-blue-200"
+    bg: /* Zenn idea */ "bg-blue-500"
       | /* Zenn tech */ "bg-violet-500"
       | string | undefined;
   };
+  thumb_bg: /* Zenn idea */ "bg-blue-200"
+      | /* Zenn tech */ "bg-violet-200"
+      | string | undefined;
 };
 const { title, link, thumbnail, poster_name, poster_icon_url, tag }: Props = Astro.props;
 ---
 
 <a href={link} class="no-underline">
   <div class="p-4">
-    <div class="aspect-oblong sms:aspect-square sm:aspect-oblong rounded-t-xl bg-blue-200 relative p-0 flex items-center justify-center">
+    <div class={`aspect-oblong sms:aspect-square sm:aspect-oblong rounded-t-xl relative p-0 flex items-center justify-center ${thumb_bg}`}>
       <slot />
       {(tag !== undefined) &&
-        <div class={"text-xs text-center absolute left-4 top-3 py-1 px-2 font-bold rounded-full text-white "+tag.bg}>{tag.text}</div>
+        <div class={`text-xs text-center absolute left-4 top-3 py-1 px-2 font-bold rounded-full text-white ${tag.bg}`>{tag.text}</div>
       }
     </div>
     <div class="border border-1 border-gray-400 p-3 rounded-b-xl shadow-xl border-t-0">
