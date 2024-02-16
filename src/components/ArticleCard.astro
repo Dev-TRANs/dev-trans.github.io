@@ -2,7 +2,6 @@
 export type Props = {
   title: string;
   link: string;
-  thumbnail: any;
   poster_name: string;
   poster_icon_url: string;
   tag: {
@@ -15,7 +14,7 @@ export type Props = {
       | /* Zenn tech */ "bg-violet-200"
       | string | undefined;
 };
-const { title, link, thumbnail, poster_name, poster_icon_url, tag, thumb_bg }: Props = Astro.props;
+const { title, link, poster_name, poster_icon_url, tag, thumb_bg }: Props = Astro.props;
 ---
 
 <a href={link} class="no-underline">

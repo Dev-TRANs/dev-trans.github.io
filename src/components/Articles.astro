@@ -106,8 +106,9 @@ const sortedData = combinedData.sort(compareDates);
           link={article.url}
           poster_name={article.user.id}
           poster_icon_url={article.user.profile_image_url}
+          thumb_bg="bg-lime-200"
         >
-          <div class="w-full h-full object-cover rounded-t-xl flex items-center content-center bg-lime-200">
+          <div class="w-full h-full object-cover rounded-t-xl flex items-center content-center">
             {/* items-center content-centerは余計かもしれない */}
             <img src="https://cdn.qiita.com/assets/public/qiita-pwa-icon_512-4f5b031e6cb002cb865db0dd38635a78.png" class="m-auto w-16 h-16" />
           </div>
