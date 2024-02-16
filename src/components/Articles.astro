@@ -51,16 +51,22 @@ type QiitaArticle = {
 };
 type QiitaContent = QiitaArticle[];
 
-const zennData: ZennContent = await ofetch<ZennContent>("https://zenn.dev/api/articles?publication_name=trans&order=latest", {
-  parseResponse: (res: string) => {return {site: "zenn", ...JSON.parse(res)}},
+const zennData: ZennArticle[] = await ofetch<ZennContent>("https://zenn.dev/api/articles?publication_name=trans&order=latest", {
+  parseResponse: (res: string) => {
+    return JSON.parse(res).articles.map((article) => {return {site: "zenn", ...article}});
+  }
 });
-const noteData: NoteContent = await ofetch<NoteContent>("https://note.com/api/v1/layout/magazine/me3717a077c16/section?page=1", {
-  parseResponse: (res: string) => {return {site: "note", ...JSON.parse(res)}},
+const noteData: NoteArticle[] = await ofetch<NoteContent>("https://note.com/api/v1/layout/magazine/me3717a077c16/section?page=1", {
+  parseResponse: (res: string) => {
+    return JSON.parse(res).data.section.contents.map((article) => {return {site: "note", ...article}});
+  },
 });
-const qiitaData: QiitaContent = await ofetch<QiitaContent>("https://qiita.com/api/v2/items?page=1&per_page=20&query=org%3Atrans-dev&sort=created", {
-  parseResponse: (res: string) => {return {site: "qiita", ...JSON.parse(res)}},
+const qiitaData: QiitaArticle[] = await ofetch<QiitaContent>("https://qiita.com/api/v2/items?page=1&per_page=20&query=org%3Atrans-dev&sort=created", {
+  parseResponse: (res: string) => {
+    return JSON.parse(res).map((article) => {return {site: "qiita", ...article}});
+  },
 });
-const combinedData: (ZennArticle | NoteArticle | QiitaArticle)[] = [...zennData.articles, ...noteData.data.section.contents, ...qiitaData];
+const combinedData: (ZennArticle | NoteArticle | QiitaArticle)[] = zennData + noteData + qiitaData;
 const compareDates = (a: { published_at: string } | { publish_at: string } | { created_at: string},
                       b: { published_at: string } | { publish_at: string } | { created_at: string},
   ): number => {
@@ -82,7 +88,7 @@ console.log(sortedData);
           poster_name={article.user.name}
           poster_icon_url={article.user.avatar_small_url}
           tag={(article.article_type === "idea" ? {text: "IDEA", bg: "bg-violet-500"} : {text: "TECH", bg: "bg-blue-200"})}
-        > 
+        >
           <div class="text-4xl md:text-5xl text-center">{article.emoji}</div>
         </ArticleCard>);
       } else if(article.site === "note") {
