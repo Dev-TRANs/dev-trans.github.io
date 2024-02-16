@@ -19,14 +19,14 @@ const { title, link, thumbnail, poster_name, poster_icon_url, tag, thumb_bg }: P
 ---
 
 <a href={link} class="no-underline">
-  <div class="p-4">
+  <div class="p-4 shadow-xl border border-1 border-gray-400">
     <div class={`aspect-oblong sms:aspect-square sm:aspect-oblong rounded-t-xl relative p-0 flex items-center justify-center ${thumb_bg}`}>
       <slot />
       {(tag !== undefined) &&
         <div class={`text-xs text-center absolute left-4 top-3 py-1 px-2 font-bold rounded-full text-white ${tag.bg}`}>{tag.text}</div>
       }
     </div>
-    <div class="border border-1 border-gray-400 p-3 rounded-b-xl shadow-xl border-t-0">
+    <div class="border border-1 border-gray-400 p-3 rounded-b-xl border-t-0">
       <p class="text-sm font-bold line-clamp-3 h-20">{title}</p>
       <div class="flex justify-right items-center mt-4">
         <img src={poster_icon_url} class="w-8 rounded-full" />
