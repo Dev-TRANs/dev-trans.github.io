@@ -98,7 +98,7 @@ const sortedData = combinedData.sort(compareDates);
           poster_name={article.user.name}
           poster_icon_url={article.user.profile_image_path}
         >
-          <img src={article.eyecatch || "./no-thumbnail.png"} class="border border-1 border-gray-400 w-full h-full object-cover rounded-t-xl h-full" />
+          <img src={article.eyecatch || "https://note.com/no-thumbnail.png"} class="border border-1 border-gray-400 w-full h-full object-cover rounded-t-xl h-full" />
         </ArticleCard>);
       } else if(article.site === "qiita") {
         return (<ArticleCard
