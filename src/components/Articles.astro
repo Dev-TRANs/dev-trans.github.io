@@ -1,8 +1,9 @@
 ---
 import { ofetch } from "ofetch";
 import ArticleCard from "./ArticleCard.astro";
-import ZennIcon from "../assets/zenn-icon.svg";
-import NoteIcon from "../assets/note-icon.svg";
+import ServiceIcon from "./ServiceIcon.astro";
+import zennIcon from "../assets/zenn-icon.svg";
+import noteIcon from "../assets/note-icon.svg";
 
 type ZennArticle = {
   site: "zenn";
@@ -119,7 +120,7 @@ const sortedData = combinedData.sort(compareDates).slice(0, 15);
   }
 </div>
 <div>
-  <a href="https://zenn.dev/p/trans"><img src={ZennIcon.src} alt="Zennのアイコン" />Zenn Publication</a>
-  <a href="https://note.com/kombumori/m/me3717a077c16"><img src={NoteIcon.src} alt="noteのアイコン" />note マガジン</a>
-  <a href="https://qiita.com/organizations/trans-dev"><img src="https://cdn.qiita.com/assets/public/qiita-pwa-icon_512-4f5b031e6cb002cb865db0dd38635a78.png" alt="Qiitaのアイコン" />Qiita Organization</a>
+  <ServiceIcon name="Zenn Publication" link="https://zenn.dev/p/trans" imgSrc={zennIcon.src} />
+  <ServiceIcon name="note マガジン" link="https://note.com/kombumori/m/me3717a077c16" imgSrc={noteIcon.src} />
+  <ServiceIcon name="Qiita Organization" link="https://qiita.com/organizations/trans-dev" imgSrc="https://cdn.qiita.com/assets/public/qiita-pwa-icon_512-4f5b031e6cb002cb865db0dd38635a78.png" />
 </div>

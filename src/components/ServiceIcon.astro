@@ -1,0 +1,13 @@
+---
+export type Props = {
+  link: string,
+  imgSrc: string,
+  name: string,
+};
+const { link, imgSrc, name }: Props = Astro.props;
+---
+
+<a href={link}>
+  <img src={imgSrc} alt={name} class="h-20" />
+  {name}
+</a>
