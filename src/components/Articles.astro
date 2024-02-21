@@ -1,6 +1,8 @@
 ---
 import { ofetch } from "ofetch";
 import ArticleCard from "./ArticleCard.astro";
+import ZennIcon from "../assets/zenn-icon.svg";
+import NoteIcon from "../assets/note-icon.svg";
 
 type ZennArticle = {
   site: "zenn";
@@ -74,7 +76,7 @@ const compareDates = (a: { published_at: string } | { publish_at: string } | { c
     const dateB = new Date(b.published_at || b.publish_at || b.created_at).getTime();
     return dateB - dateA;
   };
-const sortedData = combinedData.sort(compareDates);
+const sortedData = combinedData.sort(compareDates).slice(0, 15);
 ---
 
 <div class="grid grid-cols-1 sms:grid-cols-2 sm:grid-cols-3 gap-2">
@@ -98,7 +100,7 @@ const sortedData = combinedData.sort(compareDates);
           poster_name={article.user.name}
           poster_icon_url={article.user.profile_image_path}
         >
-          <img src={article.eyecatch || "https://note.com/no-thumbnail.png"} class="w-full h-full object-cover rounded-t-xl" />
+          <img src={article.eyecatch || "https://d2l930y2yx77uc.cloudfront.net/assets/renewal/img_mag_grid_no-image-703cffbf3dd12b865223cdd9356e260192f6151e0c9eef7eba645ee26107e7c2.svg"} class="w-full h-full object-cover rounded-t-xl" />
         </ArticleCard>);
       } else if(article.site === "qiita") {
         return (<ArticleCard
@@ -108,12 +110,16 @@ const sortedData = combinedData.sort(compareDates);
           poster_icon_url={article.user.profile_image_url}
           thumb_bg="bg-lime-200"
         >
-          <div class="w-full h-full object-cover rounded-t-xl flex items-center content-center">
-            {/* items-center content-centerは余計かもしれない */}
+          <div class="w-full h-full object-cover rounded-t-xl flex">
             <img src="https://cdn.qiita.com/assets/public/qiita-pwa-icon_512-4f5b031e6cb002cb865db0dd38635a78.png" class="m-auto w-16 h-16" />
           </div>
         </ArticleCard>);
       }
     })
   }
+</div>
+<div>
+  <a href="https://zenn.dev/p/trans"><img src={ZennIcon.src} alt="Zennのアイコン" />Zenn Publication</a>
+  <a href="https://note.com/kombumori/m/me3717a077c16"><img src={NoteIcon.src} alt="noteのアイコン" />note マガジン</a>
+  <a href="https://qiita.com/organizations/trans-dev"><img src="https://cdn.qiita.com/assets/public/qiita-pwa-icon_512-4f5b031e6cb002cb865db0dd38635a78.png" alt="Qiitaのアイコン" />Qiita Organization</a>
 </div>

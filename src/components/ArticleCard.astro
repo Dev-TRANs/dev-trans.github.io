@@ -18,7 +18,7 @@ const { title, link, poster_name, poster_icon_url, tag, thumb_bg }: Props = Astr
 ---
 
 <a href={link} class="no-underline">
-  <div class="p-4 drop-shadow-xl">
+  <div class="p-4"> {" drop-shadow-xl" /*一旦影には消えてもらって*/}
     <div class={`aspect-oblong sms:aspect-square sm:aspect-oblong rounded-t-xl relative p-0 flex items-center justify-center border border-1 border-gray-400 ${thumb_bg}`}>
       <slot />
       {(tag !== undefined) &&
