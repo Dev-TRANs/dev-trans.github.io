@@ -6,5 +6,11 @@
          "image": "./9259D4B5-4CE6-4A2B-A915-6824D09F6E9E.jpeg"
       }
    ],
-   "developed": []
+   "developed": [
+      {
+         "name": "学生支援",
+         "link": "https://github.com/Dev-TRANs/noto",
+         "image": "./g-shien.png"
+      }
+   ]
 }

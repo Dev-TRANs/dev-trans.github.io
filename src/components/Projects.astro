@@ -10,7 +10,7 @@ interface Project {
 }
 const { status } = Astro.props;
 ---
-<div class="text-center">
+<div class="text-center mb-4">
   {
     projects[status].map((project: Project) => {
       return <div class="inline-block m-2">
