@@ -3,11 +3,18 @@ export type Props = {
   link: string,
   imgSrc: string,
   name: string,
+  color: string
 };
-const { link, imgSrc, name }: Props = Astro.props;
+const { link, imgSrc, name, color }: Props = Astro.props;
 ---
 
-<a href={link} class="text-center m-auto">
-  <img src={imgSrc} alt={name} class="h-20" />
-  {/*name*/}
+<a href={link} class="text-center my-auto h-full">
+  <div class={`bg-${color}-200 border border-${color}-300 h-full rounded-xl p-4 flex sms:block sm:flex`}>
+    <img src={imgSrc} alt={name} class="w-1/5 object-contain mx-0 sms:mx-auto sm:mx-0"/>
+    <p class="m-auto pt-0 sms:pt-3 sm:pt-0 font-semibold text-base md:text-lg font-mono">{name}</p>
+  </div>
+  <!--<div class={`bg-${color}-200 h-full rounded-lg p-4 flex-none my-auto`}>
+    <img src={imgSrc} alt={name} class="w-1/5 object-contain mx-auto"/>
+    <p class="m-auto">{name}</p> -->
+  </div
 </a>
