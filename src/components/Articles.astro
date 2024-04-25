@@ -101,7 +101,7 @@ const sortedData = combinedData.sort(compareDates).slice(0, 11);
           poster_name={article.user.name}
           poster_icon_url={article.user.profile_image_path}
         >
-          <img src={article.eyecatch || "https://d2l930y2yx77uc.cloudfront.net/assets/renewal/img_mag_grid_no-image-703cffbf3dd12b865223cdd9356e260192f6151e0c9eef7eba645ee26107e7c2.svg"} class="w-full h-full object-cover rounded-t-xl" />
+          <img src={article.eyecatch || "https://d2l930y2yx77uc.cloudfront.net/assets/renewal/img_mag_grid_no-image-703cffbf3dd12b865223cdd9356e260192f6151e0c9eef7eba645ee26107e7c2.svg"} class="w-full h-full object-cover rounded-xl" />
         </ArticleCard>);
       } else if(article.site === "qiita") {
         return (<ArticleCard
@@ -111,7 +111,7 @@ const sortedData = combinedData.sort(compareDates).slice(0, 11);
           poster_icon_url={article.user.profile_image_url}
           thumb_bg="bg-lime-200"
         >
-          <div class="w-full h-full object-cover rounded-t-xl flex">
+          <div class="w-full h-full object-cover rounded-xl flex">
             <img src="https://cdn.qiita.com/assets/public/qiita-pwa-icon_512-4f5b031e6cb002cb865db0dd38635a78.png" class="m-auto w-16 h-16" />
           </div>
         </ArticleCard>);
