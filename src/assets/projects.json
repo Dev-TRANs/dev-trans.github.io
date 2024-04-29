@@ -11,6 +11,11 @@
          "name": "学生支援",
          "link": "https://noto.stki.org/",
          "image": "./g-shien.png"
+      },
+      {
+         "name": "stki.org",
+         "link": "https://www.stki.org/",
+         "image": "./IMG_2191.jpeg"
       }
    ]
 }
