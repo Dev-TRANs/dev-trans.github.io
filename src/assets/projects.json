@@ -4,11 +4,6 @@
          "name": "Schoolink",
          "link": "https://github.com/Dev-TRANs/Schoolink",
          "image": "./9259D4B5-4CE6-4A2B-A915-6824D09F6E9E.jpeg"
-      },
-      {
-         "name": "五所盛隊",
-         "link": "https://github.com/Dev-TRANs/goshokawahara-moriagetai",
-         "image": "./IMG_2245.jpeg"
       }
    ],
    "developed": [
@@ -21,6 +16,11 @@
          "name": "stki.org",
          "link": "https://www.stki.org/",
          "image": "./IMG_2191.jpeg"
+      },
+      {
+         "name": "五所盛隊",
+         "link": "https://github.com/Dev-TRANs/goshokawahara-moriagetai",
+         "image": "./IMG_2245.jpeg"
       }
    ]
 }
