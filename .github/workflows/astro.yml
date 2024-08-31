@@ -21,32 +21,35 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout ⏬
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
       - name: Setup Pages 📝
-        uses: actions/configure-pages@v3
+        uses: actions/configure-pages@v5
+
       - name: Setup Node.js environment 💚
-        uses: actions/setup-node@v3.7.0
+        uses: actions/setup-node@v4
         with:
-          node-version: 18.x
-      - name: Setup pnpm ✊
-        uses: pnpm/action-setup@v2.4.0
-        with:
-          version: latest
-      - name: Cache node_modules
-        id: node_modules_cache_id
+          node-version: latest
+
+      - name: Cache deps
         uses: actions/cache@v4
         with:
-          path: node_modules
-          key: npm-deps-${{ hashFiles('pnpm-lock.yaml') }}
-          restore-keys: pnpm-deps-
+          path: |
+            node_modules
+            ~/.npm
+          key: npm-deps-${{ hashFiles('package-lock.json') }}
+          restore-keys: npm-deps-
+
       - name: Install deps 🍢
-        run: pnpm install
+        run: npm install
+
       - name: Build Website from Astro 🏭
-        run: pnpm build
+        run: npm run build
+
       - name: Upload artifact ⏫
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v3
         with:
           path: './dist'
+
       - name: Deploy to GitHub Pages ✍️
-        id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4
