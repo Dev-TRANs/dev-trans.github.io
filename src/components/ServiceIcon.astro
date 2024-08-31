@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 export type Props = {
   link: string,
   imgSrc: string,
@@ -10,7 +11,7 @@ const { link, imgSrc, name, color }: Props = Astro.props;
 
 <a href={link} class="text-center my-auto h-full">
   <div class={`bg-${color}-200 border border-1 border-${color}-300 h-full rounded-xl p-4 flex sms:block sm:flex`}>
-    <img src={imgSrc} alt={name} class="w-1/5 object-contain mx-0 sms:mx-auto sm:mx-0"/>
+    <Image src={imgSrc} alt={name} class="w-1/5 object-contain mx-0 sms:mx-auto sm:mx-0"/>
     <p class="m-auto pt-0 sms:pt-3 sm:pt-0 font-semibold text-base md:text-lg font-mono">{name}</p>
   </div>
 </a>
