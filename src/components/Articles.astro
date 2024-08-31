@@ -2,8 +2,9 @@
 import { ofetch } from "ofetch";
 import ArticleCard from "./ArticleCard.astro";
 import ServiceIcon from "./ServiceIcon.astro";
-import zennIcon from "../assets/zenn-icon.svg";
-import noteIcon from "../assets/note-icon.svg";
+import zennIcon from "../assets/service-icons/zenn.svg";
+import noteIcon from "../assets/service-icons/note.svg";
+import qiitaIcon from "../assets/service-icons/qiita.svg";
 
 type ZennArticle = {
   site: "zenn";
@@ -121,6 +122,6 @@ const sortedData = combinedData.sort(compareDates).slice(0, 11);
   <div class="p-4 grid grid-rows-3 gap-4 min-h-60">
     <ServiceIcon name="zenn.dev" link="https://zenn.dev/p/trans" imgSrc={zennIcon} color="blue" />
     <ServiceIcon name="note.com" link="https://note.com/kombumori/m/me3717a077c16" imgSrc={noteIcon} color="violet"/>
-    <ServiceIcon name="qiita.com" link="https://qiita.com/organizations/trans-dev" imgSrc="https://cdn.qiita.com/assets/public/qiita-pwa-icon_512-4f5b031e6cb002cb865db0dd38635a78.png" color="lime" />
+    <ServiceIcon name="qiita.com" link="https://qiita.com/organizations/trans-dev" imgSrc={qiitaIcon} color="lime" />
   </div>
 </div>
