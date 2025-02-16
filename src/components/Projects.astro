@@ -13,7 +13,7 @@ const { status } = Astro.props;
 <div class="text-center mb-4">
   {
     projects[status].map((project: Project) => {
-      return <div class="inline-block m-2">
+      return <div class="inline-block m-2 align-top w-20">
         <a href={project.link} class="no-underline">
           <img src={project.image} class="h-20 rounded-full border border-gray-500">
           <p class="text-center">{project.name}</p>
