@@ -4,11 +4,6 @@
          "name": "Schoolink",
          "link": "https://github.com/Dev-TRANs/Schoolink",
          "image": "./9259D4B5-4CE6-4A2B-A915-6824D09F6E9E.jpeg"
-      },
-      {
-         "name": "東北生徒会交流会",
-         "link": "https://tsk.stki.org/",
-         "image": "./Screenshot_20250120-2344183.jpeg"
       }
    ],
    "developed": [
@@ -26,6 +21,11 @@
          "name": "五所盛り隊",
          "link": "https://goshomoritai.stki.org",
          "image": "./IMG_2245.jpeg"
+      },
+      {
+         "name": "東北生徒会交流会",
+         "link": "https://tsk.stki.org/",
+         "image": "./Screenshot_20250120-2344183.jpeg"
       }
    ]
 }
