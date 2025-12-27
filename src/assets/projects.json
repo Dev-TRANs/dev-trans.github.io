@@ -8,11 +8,6 @@
    ],
    "developed": [
       {
-         "name": "NSF",
-         "link": "https://noto.stki.org/",
-         "image": "./IMG_1747.png"
-      },
-      {
          "name": "stki.org",
          "link": "https://www.stki.org/",
          "image": "./IMG_2191.jpeg"
@@ -26,6 +21,13 @@
          "name": "TSK",
          "link": "https://tsk.stki.org/",
          "image": "./Screenshot_20250120-2344183.jpeg"
+      }
+   ],
+   "terminated": [
+      {
+         "name": "NSF(旧)",
+         "link": "https://noto.stki.org/",
+         "image": "./IMG_1747.png"
       }
    ]
 }
