@@ -9,7 +9,7 @@ export default defineConfig({
     tailwind(),
     preact(),
     sitemap({
-      filter: (page) => page !== '/discord',
+      filter: (page) => !page.endsWith('/discord/'),
     }),
   ],
   redirects: {
