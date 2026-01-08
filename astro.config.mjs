@@ -8,9 +8,7 @@ export default defineConfig({
   integrations: [
     tailwind(),
     preact(),
-    sitemap({
-      filter: (page) => !page.endsWith('/discord/'),
-    }),
+    sitemap(), 
   ],
   redirects: {
     '/discord': {
