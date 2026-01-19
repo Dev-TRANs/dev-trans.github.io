@@ -31,27 +31,16 @@ jobs:
       - name: Setup Pages 📝
         uses: actions/configure-pages@v5
 
-      - name: Setup Node.js environment 💚
-        uses: actions/setup-node@v4
+      - name: Setup Bun 🍞
+        uses: oven-sh/setup-bun@v2
         with:
-          node-version: latest
+          version: 'latest'
+      
+      - name: Install dependencies 📦
+        run: bun install
 
-      - name: Cache deps
-        uses: actions/cache@v4
-        with:
-          path: |
-            node_modules
-            ~/.npm
-          key: npm-deps-${{ hashFiles('package-lock.json') }}
-          restore-keys: npm-deps-
-
-      - name: Install deps 🍢
-        run: |
-          npm install
-          npm update
-
-      - name: Build Website from Astro 🏭
-        run: npm run build
+      - name: Build site 🏗️
+        run: bun run build
 
       - name: Upload artifact ⏫
         uses: actions/upload-pages-artifact@v3
