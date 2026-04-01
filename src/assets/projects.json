@@ -18,11 +18,6 @@
          "image": "./IMG_2245.jpeg"
       },
       {
-         "name": "TSK",
-         "link": "https://tsk.stki.org/",
-         "image": "./Screenshot_20250120-2344183.jpeg"
-      },
-      {
          "name": "NAGO YC",
          "link": "https://nagoyc.stki.org/",
          "image": "./nycp.png"
@@ -33,6 +28,11 @@
          "name": "NSF(旧)",
          "link": "https://noto.stki.org/",
          "image": "./IMG_1747.png"
+      },
+      {
+         "name": "TSK",
+         "link": "https://tsk.stki.org/",
+         "image": "./Screenshot_20250120-2344183.jpeg"
       }
    ]
 }
