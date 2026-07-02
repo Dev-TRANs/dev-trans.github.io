@@ -21,6 +21,11 @@
          "name": "NAGO YC",
          "link": "https://nagoyc.stki.org/",
          "image": "./nycp.png"
+      },
+      {
+         "name": "中生連",
+         "link": "https://chuseiren.stki.org/",
+         "image": "./IMG_8695.png"
       }
    ],
    "terminated": [
