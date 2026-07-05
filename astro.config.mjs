@@ -15,5 +15,9 @@ export default defineConfig({
       status: 302,
       destination: 'https://discord.com/invite/jnZevNmYRg'
     },
+    '/inquiry': {
+      status: 302,
+      destination: 'https://discord.com/invite/wAZdbqpjWW'
+    },
   },
 });
