@@ -36,6 +36,11 @@
          "name": "Learn Link",
          "link": "https://learnlink.stki.org",
          "image": "./IMG_4251.png"
+      },
+      {
+         "name": "Animos",
+         "link": "https://animos.stki.org",
+         "image": "./image.png"
       }
    ],
    "terminated": [
