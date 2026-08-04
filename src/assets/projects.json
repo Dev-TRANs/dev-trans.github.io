@@ -41,6 +41,16 @@
          "name": "Animos",
          "link": "https://animos.stki.org",
          "image": "./image.png"
+      },
+      {
+         "name": "Animos",
+         "link": "https://animos.stki.org",
+         "image": "./image.png"
+      },
+      {
+         "name": "",
+         "link": "https://iskseitokai.stki.org",
+         "image": "./1bdb81cd633a78c7.png"
       }
    ],
    "terminated": [
